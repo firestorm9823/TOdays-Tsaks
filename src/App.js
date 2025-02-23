@@ -71,7 +71,7 @@ useEffect(()=>{
   <Header title="ToDo-list" searchBar={true} />
   <Routes>
     <Route
-     exact path="/"
+     
       element={
         <>
           <AddTodo addTodo={addTodo} />
