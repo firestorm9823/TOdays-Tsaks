@@ -44,7 +44,7 @@
 
 import React, { useState } from 'react';
 
-export default function AddTodo({ addTodo }) {  // ✅ Destructure props properly
+export default function AddTodo({ addTodo }) {  
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -56,7 +56,7 @@ export default function AddTodo({ addTodo }) {  // ✅ Destructure props properl
       return;
     }
     
-    addTodo(title, desc);  // ✅ Call addTodo correctly
+    addTodo(title, desc);  
     setTitle("");
     setDesc("");
   };
