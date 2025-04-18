@@ -1,5 +1,91 @@
 
 
+// import "./App.css";
+// import Header from "./Components/Header";
+// import Footer from "./Components/Footer";
+// import Todos from "./Components/Todos";
+// import AddTodo from "./Components/AddTodo";
+// import About from "./Components/About";
+// import { useEffect, useState } from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// function App() {
+//   let initTodo;
+//   if (localStorage.getItem("todos") === null) {
+//     initTodo = [];
+//   } else {
+//     initTodo = JSON.parse(localStorage.getItem("todos"));
+//   }
+
+//   const [todos, setTodos] = useState(initTodo);
+//   const [searchText, setSearchText] = useState("");
+
+
+//   useEffect(() => {
+//     localStorage.setItem("todos", JSON.stringify(todos));
+//   }, [todos]);
+
+//   const onDelete = (todo) => {
+//     console.log("Deleting todo:", todo);
+
+//     const updatedTodos = todos.filter((e) => e !== todo);
+//     setTodos(updatedTodos);
+//   };
+
+//   const addTodo = (title, desc) => {
+//     console.log("Adding a Todo", title, desc);
+//     let sno = todos.length === 0 ? 0 : todos[todos.length - 1].sno + 1;
+
+//     const mytodo = {
+//       sno: sno,
+//       title: title,
+//       desc: desc,
+//     };
+
+//     setTodos([...todos, mytodo]);
+//   };
+
+//   const filteredTodos = todos.filter(todo =>
+//     todo.title.toLowerCase().includes(searchText.toLowerCase())
+//   );
+
+//   const updateTodo = (updatedTodo) => {
+//     const newTodos = todos.map(todo =>
+//       todo.sno === updatedTodo.sno ? updatedTodo : todo
+//     );
+//     setTodos(newTodos);
+//   };
+  
+  
+
+//   return (
+//     <>
+//       <Router>
+//         <Header title="ToDo-list" searchBar={true} searchText={searchText} setSearchText={setSearchText} />
+//         <Routes>
+//           <Route
+//             path="/"
+//             element={
+//               <>
+//                 <AddTodo addTodo={addTodo} />
+//                 <Todos todos={filteredTodos} onDelete={onDelete} onUpdate={updateTodo} />
+
+//               </>
+//             }
+//           />
+//           <Route exact path="/About" element={<About />} />
+//         </Routes>
+//         <Footer />
+//       </Router>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+
 import "./App.css";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -18,6 +104,8 @@ function App() {
   }
 
   const [todos, setTodos] = useState(initTodo);
+  const [searchText, setSearchText] = useState("");
+
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -33,27 +121,57 @@ function App() {
   const addTodo = (title, desc) => {
     console.log("Adding a Todo", title, desc);
     let sno = todos.length === 0 ? 0 : todos[todos.length - 1].sno + 1;
-
+  
     const mytodo = {
       sno: sno,
       title: title,
       desc: desc,
+      completed: false, // <-- new field
     };
-
+  
     setTodos([...todos, mytodo]);
   };
+  
+  const filteredTodos = todos.filter(todo =>
+    todo.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const updateTodo = (updatedTodo) => {
+    const newTodos = todos.map(todo =>
+      todo.sno === updatedTodo.sno ? updatedTodo : todo
+    );
+    setTodos(newTodos);
+  };
+  
+  const toggleComplete = (sno) => {
+    const newTodos = todos.map(todo => {
+      if (todo.sno === sno) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+  
+  
 
   return (
     <>
       <Router>
-        <Header title="ToDo-list" searchBar={true} />
+        <Header title="ToDo-list" searchBar={true} searchText={searchText} setSearchText={setSearchText} />
         <Routes>
           <Route
             path="/"
             element={
               <>
                 <AddTodo addTodo={addTodo} />
-                <Todos todos={todos} onDelete={onDelete} />
+                <Todos
+                  todos={todos}
+                  onDelete={onDelete}
+                  onUpdate={updateTodo}
+                  onToggleComplete={toggleComplete}
+                />
+
               </>
             }
           />
