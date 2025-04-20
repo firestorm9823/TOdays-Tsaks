@@ -79,6 +79,9 @@ export default function Header({ title, searchBar, searchText, setSearchText }) 
               <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
+            <Link to="/deleted" className="nav-link">Deleted Todos</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/about">About</Link>
             </li>
           </ul>

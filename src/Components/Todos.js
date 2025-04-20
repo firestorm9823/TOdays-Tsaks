@@ -1,42 +1,50 @@
-// // import React from 'react'
-// // import TodoItem  from "./TodoItem";
+// import React from 'react'
+// import TodoItem  from "./TodoItem";
 
-// // export default function Todos(props) {
+// export default function Todos(props) {
 
-// //   let mystyle={
-// //     minHeight:"70vh",
-// //     margin:"10px auto"
-// //   }
+//   let mystyle={
+//     minHeight:"70vh",
+//     margin:"10px auto"
+//   }
 
-// //   return (
-// //     <>
-// //     <div className="container my-3" style={mystyle}>
-// //       <h3 className=' my-5'>Todos List</h3>  
+//   return (
+//     <>
+//     <div className="container my-3" style={mystyle}>
+//       <h3 className=' my-5'>Todos List</h3>  
 
-// //       {props.todos.length===0? "No Todos to display ":
-// //       props.todos.map((todo)=>{
-// //         return <TodoItem todo={todo} key={todo.sno} onDelete={props.onDelete} />
-// //       })
+//       {props.todos.length===0? "No Todos to display ":
+//       props.todos.map((todo)=>{
+//         return <TodoItem todo={todo} key={todo.sno} onDelete={props.onDelete} />
+//       })
 
-// //     }
+//     }
    
 
            
-// //     </div>
+//     </div>
 
-// //     </>
-// //   )
-// // }
+//     </>
+//   )
+// }
 
-
-// import React from 'react'
+// import React from 'react';
 // import TodoItem from "./TodoItem";
 
-// export default function Todos({ todos, onDelete, onUpdate ,onToggleComplete }) {
+// export default function Todos({ todos, onDelete, onUpdate }) {
 //   let mystyle = {
 //     minHeight: "70vh",
 //     margin: "10px auto"
 //   };
+
+//   <TodoItem
+//   todo={todo}
+//   key={todo.sno}
+//   onDelete={onDelete}
+//   onUpdate={onUpdate}
+//   onToggleComplete={onToggleComplete}
+// />
+
 
 //   return (
 //     <>
@@ -62,34 +70,27 @@
 //   );
 // }
 
+
 import React from 'react';
 import TodoItem from "./TodoItem";
 
 export default function Todos({ todos, onDelete, onUpdate, onToggleComplete }) {
-  let mystyle = {
-    minHeight: "70vh",
-    margin: "10px auto"
-  };
-
   return (
-    <>
-      <div className="container my-3" style={mystyle}>
-        <h3 className='my-5'>Todos List</h3>
-
-        {todos.length === 0 ? (
-          "No Todos to display"
-        ) : (
-          todos.map((todo) => (
-            <TodoItem
-              todo={todo}
-              key={todo.sno}
-              onDelete={onDelete}
-              onUpdate={onUpdate}
-              onToggleComplete={onToggleComplete}
-            />
-          ))
-        )}
-      </div>
-    </>
+    <div className="container my-3" style={{ minHeight: "70vh", margin: "10px auto" }}>
+      <h3 className='my-5'>Todos List</h3>
+      {todos.length === 0 ? (
+        "No Todos to display"
+      ) : (
+        todos.map((todo) => (
+          <TodoItem
+            todo={todo}
+            key={todo.sno}
+            onDelete={onDelete}
+            onUpdate={onUpdate}
+            onToggleComplete={onToggleComplete}
+          />
+        ))
+      )}
+    </div>
   );
 }
